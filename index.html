@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather App</title>
+    <link rel="shortcut icon" href="/assets/images/icons/favicon96x96.ico" />
+    <link rel="stylesheet" href="./style/index.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="app-loader" class="lds-dual-ring center"></div>
+
+    <main hidden>
+        <button id="open-menu-btn" class="ripple">
+            <img class="icon-sm-28" src="./assets/images/icons/menu.png" alt="">
+        </button>
+        <section id="current-day-weather-container">
+            <h1 class="location-label"></h1>
+            <div class="flex-container" id="temperature-summary-container">
+                <div>
+                    <img src="./assets/images/summary-icons/clear-day-white.png" alt="Summary Icon" id="currentlyIcon">
+                </div>
+                <div>
+                    <h1 id="degrees-label"></h1>
+                    <p id="summary-label"></p>
+                </div>
+            </div>
+            <div class="flex-container" id="humidity-wind-container">
+                <div>
+                    <img class="icon-sm-30" src="./assets/images/icons/humidity.png" alt="humidity">
+                    <span id="humidity-label"></span>
+                </div>
+                <div>
+                    <img class="icon-sm-30" src="./assets/images/icons/wind-speed-flag.png" alt="humidity">
+                    <span id="wind-speed-label"></span>
+                </div>
+            </div>
+        </section>
+        <section class="lower-panel">
+            <button id="toggle-hourly-weather" class="ripple center_x">
+                <img src="./assets/images/icons/up-arrow.png" alt="">
+            </button>
+            <div id="daily-weather-wrapper" class="lower-panel-body">
+                <div class="flex-container weather-box display-none">
+                    <div>
+                        <h1>Sunday</h1>
+                    </div>
+                    <div class="flex-container">
+                        <div>
+                            <p>18&#176;</p>
+                        </div>
+                        <div>
+                            <img class="icon-sm-30" src="./assets/images/summary-icons/clear-day-white.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="hourly-weather-wrapper" class="lower-panel-body" visible="false">
+                <div class="flex-container weather-box display-none">
+                    <div>
+                        <h1>14:00</h1>
+                    </div>
+                    <div class="flex-container">
+                        <div>
+                            <p>18&#176;</p>
+                        </div>
+                        <div>
+                            <img class="icon-sm-30" src="./assets/images/summary-icons/clear-day-grey.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="menu-container">
+            <button id="close-menu-btn" class="ripple">
+                &#10006;
+            </button>
+            <div>
+                <div id="add-location-wrapper">
+                    <input type="text" placeholder="Location" id="location-input">
+                    <br>
+                    <button class="ripple disabled" id="add-city-btn" disabled>Add City</button>
+                    <h1 class="location-label"></h1>
+                </div>
+
+                <div id="saved-cities-wrapper">
+                    <div class="flex-container saved-city-box">
+                        <div class="ripple">
+                            <h1></h1>
+                        </div>
+                        <div>
+                            <button class="ripple remove-saved-city">-</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./scripts/index.js"></script>
+</body>
+
+</html>

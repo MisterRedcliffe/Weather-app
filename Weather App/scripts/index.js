@@ -52,12 +52,12 @@ const UI = (function() {
             e.innerHTML = location;
         });
         document.querySelector('main').style.backgroundImage = `url("./assets/images/bg-images/${currentlyData.icon}.jpg")`;
-        document.querySelector("#currentlyIcon").setAttribute('src', `./assets/images/summary-icons/${currentlyData.icon}-white.png`);
+        document.querySelector("#currentlyIcon").setAttribute('src', `"../assets/images/summary-icons/${currentlyData.icon}-white.png"`);
         document.querySelector("#summary-label").innerHTML = currentlyData.summary;
         document.querySelector("#humidity-label").innerHTML = Math.round(currentlyData.humidity * 100) + '%';
         document.querySelector("#wind-speed-label").innerHTML = (currentlyData.windSpeed * 1.6093).toFixed(1) + ' kph';
-        document.querySelector("#degrees-label").innerHTML = Math.round((
-            currentlyData.temperature - 32) * 5 / 9) + '&#176;'
+        document.querySelector("#degrees-label").innerHTML = Math.round(
+            currentlyData.temperature) + '&#176';
         while (dailyWeatherWrapper.children[1]) {
             dailyWeatherWrapper.removeChild(dailyWeatherWrapper.children[1]);
         }
@@ -66,10 +66,12 @@ const UI = (function() {
             dailyWeatherModel = dailyWeatherWrapper.children[0].cloneNode(true);
             dailyWeatherModel.classList.remove('display-none');
             day = weekDays[new Date(dailyData[i].time * 1000).getDay()];
+            maxMinTemp = Math.round(dailyData[i].temperatureMax) + '&#176;' + '/' + Math.round(dailyData[i].temperatureMin) + '&#176;';
+            dailyWeatherModel.children[1].children[0].innerHTML = maxMinTemp;
             dailyWeatherModel.children[0].children[0].innerHTML = day;
             dailyWeatherModel.children[1].children[0].innerHTML = maxMinTemp;
             dailyIcon = dailyData[i].icon;
-            dailyWeatherModel.children[1].children[1].children[0].setAttribute('src', `./assets/images/summary-icons/${dailyIcon}-white.png`);
+            dailyWeatherModel.children[1].children[1].children[0].setAttribute('src', './assets/images/summary-icons/${dailyIcon}-white.png');
             dailyWeatherWrapper.appendChild(dailyWeatherModel);
         }
         dailyWeatherWrapper.children[1].classList.add('current-day-of-the-week');
@@ -84,7 +86,7 @@ const UI = (function() {
             hourlyWeatherModel.children[0].children[0].innerHTML = new Date(hourlyData[i].time * 1000).getHours() + ":00";
             hourlyWeatherModel.children[1].children[0].innerHTML = Math.round((hourlyData[i].temperature - 32) * 5 / 9) + '&#176;';
             hourlyIcon = hourlyData[i].icon;
-            hourlyWeatherModel.children[1].children[1].children[0].setAttribute('src', `./assets/images/summary-icons/${hourlyIcon}-grey.png`);
+            hourlyWeatherModel.children[1].children[1].children[0].setAttribute('src', './assets/images/summary-icons/${hourlyIcon}-grey.png');
             hourlyWeatherWrapper.appendChild(hourlyWeatherModel);
         }
 
@@ -170,13 +172,13 @@ const WEATHER = (function() {
                 _getDarkSkyData(darkskyURL, location);
             })
             .catch((err) => {
-                console.log(err)
-            })
+                console.log(err);
+            });
     };
 
     return {
         getWeather
-    }
+    };
 })();
 
 window.onload = function() {
